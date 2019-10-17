@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeUnit : Unit
+public class RangedUnit : Unit
 {
     // Start is called before the first frame update
     void Start()
@@ -10,7 +10,7 @@ public class MeleeUnit : Unit
         hp = 10;
         maxHP = hp;
         attk = 2;
-        range = 1;
+        range = 2;
         speed = 0.5f;
 
         team = Random.Range(0, 2);
@@ -27,8 +27,7 @@ public class MeleeUnit : Unit
                     gameObject.tag = "Day Walkers";
                     break;
                 }
-                
+
         }
     }
-
 }
