@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -12,12 +13,17 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected int team;
     [SerializeField] protected Material[] mat;
 
+    protected Image healthbar;
+
     public int Hp { get => hp; set => hp = value; }
     public int MaxHP { get => maxHP;}
     public int Attk { get => attk;}
     public float Speed { get => speed;}
     public int Range { get => range;}
     public int Team { get => team;}
+
+    int duration = 1;
+    float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +38,19 @@ public abstract class Unit : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
         }
-        else Debug.Log(Vector3.Distance(transform.position, GetClosestUnit().transform.position));
+        else
+        {
+
+        }
+
+        timer += Time.deltaTime;
+        if(timer >= duration)
+        {
+            hp--;
+            timer = 0;
+        }
+
+        healthbar.fillAmount = (float)hp / maxHP;
     }
 
     protected GameObject GetClosestUnit()

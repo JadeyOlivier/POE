@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeleeUnit : Unit
 {
@@ -26,9 +27,10 @@ public class MeleeUnit : Unit
                 {
                     gameObject.tag = "Day Walkers";
                     break;
-                }
-                
+                }                
         }
+
+        healthbar = GetComponentsInChildren<Image>()[1];
     }
 
 }

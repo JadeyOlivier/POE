@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RangedUnit : Unit
 {
@@ -27,7 +28,8 @@ public class RangedUnit : Unit
                     gameObject.tag = "Day Walkers";
                     break;
                 }
-
         }
+
+        healthbar = GetComponentsInChildren<Image>()[1];
     }
 }
