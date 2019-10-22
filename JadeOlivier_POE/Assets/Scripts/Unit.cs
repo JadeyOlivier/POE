@@ -40,7 +40,7 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-
+            //Attack(GetClosestUnit());
         }
 
         timer += Time.deltaTime;
@@ -107,5 +107,20 @@ public abstract class Unit : MonoBehaviour
         }
 
         return returnVal;
+    }
+
+    /*protected void Attack(GameObject Enemy)
+    {
+        if (Enemy == MeleeUnit )
+        Enemy.GetComponent<Unit>().Hp -= this.Attk;
+        
+    }*/
+
+    protected void IsDead()
+    {
+        if(this.Hp <= 0)
+        {
+            GameObject.Destroy(this);
+        }
     }
 }

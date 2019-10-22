@@ -8,6 +8,7 @@ TagManager:
   - Day Walkers
   - Night Riders
   - Wizard
+  - ResourceBuilding
   layers:
   - Default
   - TransparentFX
