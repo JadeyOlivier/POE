@@ -29,11 +29,11 @@ public class CameraMove : MonoBehaviour
 
     void CamerZoom()
     {
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.Plus))
         {
             transform.position += new Vector3(0, -speed * Time.deltaTime * 10, 0);
         }
-        else if (Input.GetKey(KeyCode.M))
+        else if (Input.GetKey(KeyCode.Minus))
         {
             transform.position += new Vector3(0, speed * Time.deltaTime * 10, 0);
         }

@@ -1,22 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MeleeUnit : Unit
+public class ResourceBuilding : Building
 {
     // Start is called before the first frame update
     void Start()
     {
-        hp = 10;
-        maxHP = hp;
-        attk = 2;
-        range = 1;
-        speed = 0.5f;
+        buildingHp = 15;
+        buidlingMaxHP = buildingHp;
 
-        team = Random.Range(0, 3);
-        GetComponent<MeshRenderer>().material = mat[team];
-        switch (team)
+        buildingTeam = Random.Range(0, 2);
+        GetComponent<MeshRenderer>().material = mat[buildingTeam];
+        switch (buildingTeam)
         {
             case 0:
                 {
@@ -27,10 +23,8 @@ public class MeleeUnit : Unit
                 {
                     gameObject.tag = "Day Walkers";
                     break;
-                }                
+                }
         }
-
-        healthbar = GetComponentsInChildren<Image>()[1];
     }
 
 }

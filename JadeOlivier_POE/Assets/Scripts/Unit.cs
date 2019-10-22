@@ -57,6 +57,7 @@ public abstract class Unit : MonoBehaviour
     {
         GameObject unit = null;
         GameObject[] units = null;
+        //GameObject[] buildings = null;
 
         switch (team)
         {
@@ -68,6 +69,11 @@ public abstract class Unit : MonoBehaviour
             case 1:
                 {
                     units = GameObject.FindGameObjectsWithTag("Night Riders");
+                    break;
+                }
+            case 2:
+                {
+                    units = GameObject.FindGameObjectsWithTag("Wizard");
                     break;
                 }
         }

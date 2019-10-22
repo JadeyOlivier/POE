@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] options = new GameObject[3];
-    [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 10;
+    [SerializeField] static int MIN_X = -20, MAX_X = 20, MIN_Z = -20, MAX_Z = 20, UNITS = 20;
      // Start is called before the first frame update
     void Start()
     {
