@@ -9,6 +9,7 @@ public class FactoryBuilding : Building
     {
         buildingHp = 15;
         buidlingMaxHP = buildingHp;
+
         buildingTeam = Random.Range(0, 2);
         GetComponent<MeshRenderer>().material = mat[buildingTeam];
         switch (buildingTeam)

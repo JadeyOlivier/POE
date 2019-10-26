@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] units = new GameObject[3];
     [SerializeField] GameObject[] buildings = new GameObject[2];
     [SerializeField] static int MIN_X = -20, MAX_X = 20, MIN_Z = -20, MAX_Z = 20, UNITS = 15, BUILDINGS = 6;
+    ResourceBuilding rb = new ResourceBuilding();
      // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,8 @@ public class GameEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Text resourceDisplay = GameObject.Find("ResourceDisplay").GetComponent<Text>();
+        resourceDisplay.text += "Night Rider Resources: " + rb.generatedNR;
+        resourceDisplay.text += "Day Walkers Resources: " + rb.generatedDW;
     }
 }

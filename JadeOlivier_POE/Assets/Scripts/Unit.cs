@@ -43,12 +43,12 @@ public abstract class Unit : MonoBehaviour
             //Attack(GetClosestUnit());
         }
 
-        timer += Time.deltaTime;
+        /*timer += Time.deltaTime;
         if(timer >= duration)
         {
             hp--;
             timer = 0;
-        }
+        }*/
 
         healthbar.fillAmount = (float)hp / maxHP;
     }
@@ -57,30 +57,69 @@ public abstract class Unit : MonoBehaviour
     {
         GameObject unit = null;
         GameObject[] units = null;
+        GameObject[] units2 = null;
+        GameObject[] opposingUnits = null;
+        int count;
         //GameObject[] buildings = null;
 
         switch (team)
         {
             case 0:
                 {
+                    count = 0;
                     units = GameObject.FindGameObjectsWithTag("Day Walkers");
+                    units2 = GameObject.FindGameObjectsWithTag("Wizard");
+                    foreach(GameObject temp in units)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
+                    foreach (GameObject temp in units2)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
                     break;
                 }
             case 1:
                 {
+                    count = 0;
                     units = GameObject.FindGameObjectsWithTag("Night Riders");
+                    units2 = GameObject.FindGameObjectsWithTag("Wizard");
+                    foreach (GameObject temp in units)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
+                    foreach (GameObject temp in units2)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
                     break;
                 }
             case 2:
                 {
-                    units = GameObject.FindGameObjectsWithTag("Wizard");
+                    count = 0;
+                    units = GameObject.FindGameObjectsWithTag("Day Walkers");
+                    units2 = GameObject.FindGameObjectsWithTag("Night Riders");
+                    foreach (GameObject temp in units)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
+                    foreach (GameObject temp in units2)
+                    {
+                        opposingUnits[count] = temp;
+                        count++;
+                    }
                     break;
                 }
         }
 
         float distance = 9999;
 
-        foreach(GameObject temp in units)
+        foreach(GameObject temp in opposingUnits)
         {
             float tempDist = Vector3.Distance(transform.position, temp.transform.position);
             if (tempDist <= distance)
@@ -109,18 +148,23 @@ public abstract class Unit : MonoBehaviour
         return returnVal;
     }
 
-    /*protected void Attack(GameObject Enemy)
+    protected void Attack(GameObject Enemy)
     {
-        if (Enemy == MeleeUnit )
-        Enemy.GetComponent<Unit>().Hp -= this.Attk;
-        
-    }*/
+        if (Enemy.name.Contains("Unit"))
+        {
+            Enemy.GetComponent<Unit>().Hp -= this.Attk;
+        }
+        else if (Enemy.name.Contains("Building"))
+        {
+            Enemy.GetComponent<Building>().BuildingHp -= this.Attk;
+        }      
+    }
 
     protected void IsDead()
     {
         if(this.Hp <= 0)
         {
-            GameObject.Destroy(this);
+            GameObject.Destroy(gameObject);
         }
     }
 }

@@ -26,6 +26,13 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(gameObject.name == "ResourceBuilding")
+        {
+
+        }
+        else if (gameObject.name == "FactoryBuilding")
+        {
+
+        }
     }
 }
