@@ -38,10 +38,6 @@ public abstract class Unit : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
         }
-        else
-        {
-            //Attack(GetClosestUnit());
-        }
 
         /*timer += Time.deltaTime;
         if(timer >= duration)
@@ -56,70 +52,45 @@ public abstract class Unit : MonoBehaviour
     protected GameObject GetClosestUnit()
     {
         GameObject unit = null;
-        GameObject[] units = null;
-        GameObject[] units2 = null;
-        GameObject[] opposingUnits = null;
-        int count;
+        GameObject[] opposition = null;
+        GameObject[] secondOpposition = null;
         //GameObject[] buildings = null;
 
         switch (team)
         {
             case 0:
                 {
-                    count = 0;
-                    units = GameObject.FindGameObjectsWithTag("Day Walkers");
-                    units2 = GameObject.FindGameObjectsWithTag("Wizard");
-                    foreach(GameObject temp in units)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
-                    foreach (GameObject temp in units2)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
+                    opposition = GameObject.FindGameObjectsWithTag("Day Walkers");
+                    secondOpposition = GameObject.FindGameObjectsWithTag("Wizard");
                     break;
                 }
             case 1:
                 {
-                    count = 0;
-                    units = GameObject.FindGameObjectsWithTag("Night Riders");
-                    units2 = GameObject.FindGameObjectsWithTag("Wizard");
-                    foreach (GameObject temp in units)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
-                    foreach (GameObject temp in units2)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
+                    opposition = GameObject.FindGameObjectsWithTag("Night Riders");
+                    secondOpposition = GameObject.FindGameObjectsWithTag("Wizard");
                     break;
                 }
             case 2:
                 {
-                    count = 0;
-                    units = GameObject.FindGameObjectsWithTag("Day Walkers");
-                    units2 = GameObject.FindGameObjectsWithTag("Night Riders");
-                    foreach (GameObject temp in units)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
-                    foreach (GameObject temp in units2)
-                    {
-                        opposingUnits[count] = temp;
-                        count++;
-                    }
+                    opposition = GameObject.FindGameObjectsWithTag("Day Walkers");
+                    secondOpposition = GameObject.FindGameObjectsWithTag("Night Riders");
                     break;
                 }
         }
 
         float distance = 9999;
 
-        foreach(GameObject temp in opposingUnits)
+        foreach(GameObject temp in opposition)
+        {
+            float tempDist = Vector3.Distance(transform.position, temp.transform.position);
+            if (tempDist <= distance)
+            {
+                distance = tempDist;
+                unit = temp;
+            }
+        }
+
+        foreach (GameObject temp in secondOpposition)
         {
             float tempDist = Vector3.Distance(transform.position, temp.transform.position);
             if (tempDist <= distance)
