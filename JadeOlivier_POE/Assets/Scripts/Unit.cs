@@ -22,9 +22,6 @@ public abstract class Unit : MonoBehaviour
     public int Range { get => range;}
     public int Team { get => team;}
 
-    int duration = 1;
-    float timer = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -33,20 +30,44 @@ public abstract class Unit : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (!IsInRange(GetClosestUnit()))
+    {       
+        if(gameObject.tag != "Wizard")
         {
-            transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
+            if(IsDead() == false)
+            {
+                if (Hp >= 25)
+                {
+                    GameObject closest = GetClosestUnit();
+                    if (!IsInRange(closest))
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        Attack(closest);
+                    }
+                }
+                else
+                {
+
+                }
+            }
+         
+        }
+        else
+        {
+            GameObject closest = GetClosestUnit();
+            if (!IsInRange(closest))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
+            }
+            else
+            {
+                Attack(closest);
+            }
         }
 
-        /*timer += Time.deltaTime;
-        if(timer >= duration)
-        {
-            hp--;
-            timer = 0;
-        }*/
-
-        healthbar.fillAmount = (float)hp / maxHP;
+       // healthbar.fillAmount = (float)hp / maxHP;
     }
 
     protected GameObject GetClosestUnit()
@@ -131,11 +152,15 @@ public abstract class Unit : MonoBehaviour
         }      
     }
 
-    protected void IsDead()
+    protected bool IsDead()
     {
+        bool dead = false;
         if(this.Hp <= 0)
         {
             GameObject.Destroy(gameObject);
+            dead = true;
         }
+
+        return dead;
     }
 }

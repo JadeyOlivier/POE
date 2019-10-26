@@ -7,7 +7,7 @@ public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] units = new GameObject[3];
     [SerializeField] GameObject[] buildings = new GameObject[2];
-    [SerializeField] static int MIN_X = -20, MAX_X = 20, MIN_Z = -20, MAX_Z = 20, UNITS = 15, BUILDINGS = 6;
+    [SerializeField] static int MIN_X = -20, MAX_X = 20, MIN_Z = -20, MAX_Z = 20, UNITS = 10, BUILDINGS = 6;
      // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +40,7 @@ public class GameEngine : MonoBehaviour
         Text resourceDisplay = GameObject.Find("ResourceDisplay").GetComponent<Text>();resourceDisplay.text += "Night Riders Resources: ";
         resourceDisplay.text = "";
         resourceDisplay.text += "Resources: " + "\n";
-        resourceDisplay.text += "Night Riders Resources: " + "\n";//+ generatedNR;
-        resourceDisplay.text += "Day Walkers Resources: ";//+ generatedDW;
+        resourceDisplay.text += "Night Riders Resources: " + GetComponent<ResourceBuilding>().generatedNR + "\n";//+ generatedNR;
+        resourceDisplay.text += "Day Walkers Resources: " + GetComponent<ResourceBuilding>().generatedDW;//+ generatedDW;
     }
 }

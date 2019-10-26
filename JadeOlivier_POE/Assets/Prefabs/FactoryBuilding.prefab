@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7137974870383789000}
   - component: {fileID: 7409611986266689192}
   - component: {fileID: 7350115183901962138}
-  - component: {fileID: 8497141972580776897}
   - component: {fileID: 5839947664218185329}
   m_Layer: 0
   m_Name: FactoryBuilding
@@ -94,22 +93,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8497141972580776897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101135281935742391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a565ce960a4a42a2517716b2ade59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingHp: 0
-  buidlingMaxHP: 0
-  buildingTeam: 0
-  mat: []
 --- !u!114 &5839947664218185329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +111,9 @@ MonoBehaviour:
   mat:
   - {fileID: 2100000, guid: 9e9d968e3dba54141aab759af07cf0e9, type: 2}
   - {fileID: 2100000, guid: b3960531dc311224ca55f24476a7214d, type: 2}
+  generatedUnits:
+  - {fileID: 2818561918465166478, guid: 94d2d37f9b67b26458d1b49d405c04fc, type: 3}
+  - {fileID: 3636115328071761662, guid: c261d8f6d5758174b9a3a6f6112076e7, type: 3}
 --- !u!1 &2171872024563553800
 GameObject:
   m_ObjectHideFlags: 0

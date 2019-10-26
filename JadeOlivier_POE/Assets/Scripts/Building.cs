@@ -28,7 +28,7 @@ public class Building : MonoBehaviour
     {
         if(gameObject.name == "ResourceBuilding")
         {
-
+            GetComponent<ResourceBuilding>().GenResources();
         }
         else if (gameObject.name == "FactoryBuilding")
         {
