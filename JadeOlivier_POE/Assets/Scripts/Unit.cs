@@ -147,26 +147,57 @@ public abstract class Unit : MonoBehaviour
 
         float distance = 9999;
 
-        foreach(GameObject temp in opposition)
+        if(gameObject.tag == "Wizard")
         {
-            float tempDist = Vector3.Distance(transform.position, temp.transform.position);
-            if (tempDist <= distance)
+            foreach (GameObject temp in opposition)
             {
-                distance = tempDist;
-                unit = temp;
+                if (!temp.name.Contains("Building"))
+                {
+                    float tempDist = Vector3.Distance(transform.position, temp.transform.position);
+                    if (tempDist <= distance)
+                    {
+                        distance = tempDist;
+                        unit = temp;
+                    }
+                }
+            }
+
+            foreach (GameObject temp in secondOpposition)
+            {
+                if (!temp.name.Contains("Building"))
+                {
+                    float tempDist = Vector3.Distance(transform.position, temp.transform.position);
+                    if (tempDist <= distance)
+                    {
+                        distance = tempDist;
+                        unit = temp;
+                    }
+                }
             }
         }
-
-        foreach (GameObject temp in secondOpposition)
+        else
         {
-            float tempDist = Vector3.Distance(transform.position, temp.transform.position);
-            if (tempDist <= distance)
+            foreach (GameObject temp in opposition)
             {
-                distance = tempDist;
-                unit = temp;
+                float tempDist = Vector3.Distance(transform.position, temp.transform.position);
+                if (tempDist <= distance)
+                {
+                    distance = tempDist;
+                    unit = temp;
+                }
+            }
+
+            foreach (GameObject temp in secondOpposition)
+            {
+                float tempDist = Vector3.Distance(transform.position, temp.transform.position);
+                if (tempDist <= distance)
+                {
+                    distance = tempDist;
+                    unit = temp;
+                }
             }
         }
-
+       
         return unit;
     }
 

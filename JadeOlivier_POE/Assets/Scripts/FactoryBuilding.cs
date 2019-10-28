@@ -29,7 +29,7 @@ public class FactoryBuilding : Building
                 }
         }
 
-        neededResources = 15;
+        neededResources = 30;
     }
 
     public void GenUnit()
