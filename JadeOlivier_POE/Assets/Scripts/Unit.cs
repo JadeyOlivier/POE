@@ -13,6 +13,9 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected int team;
     [SerializeField] protected Material[] mat;
 
+    GameObject[] opposition = null;
+    GameObject[] secondOpposition = null;
+
     protected Image healthbar;
 
     public int Hp { get => hp; set => hp = value; }
@@ -33,48 +36,91 @@ public abstract class Unit : MonoBehaviour
     {       
         if(gameObject.tag != "Wizard")
         {
-            if(IsDead() == false)
+            if(!IsDead())
             {
-                if (Hp >= 25)
+                if (this.Hp >= (0.25 * MaxHP))
                 {
                     GameObject closest = GetClosestUnit();
                     if (!IsInRange(closest))
                     {
-                        transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
+                        transform.position = Vector3.MoveTowards(transform.position, closest.transform.position, speed * Time.deltaTime);
                     }
-                    else
+                    else if (IsInRange(closest))
                     {
                         Attack(closest);
                     }
                 }
                 else
                 {
-
+                    GameObject movePoint = new GameObject();
+                    movePoint.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+                    transform.position = Vector3.MoveTowards(transform.position, movePoint.transform.position, speed * Time.deltaTime);
                 }
-            }
-         
-        }
-        else
-        {
-            GameObject closest = GetClosestUnit();
-            if (!IsInRange(closest))
-            {
-                transform.position = Vector3.MoveTowards(transform.position, GetClosestUnit().transform.position, speed * Time.deltaTime);
             }
             else
             {
-                Attack(closest);
+                GameObject.Destroy(gameObject);
+            }
+         
+        }
+        else if (gameObject.tag == "Wizard")
+        {
+            GameObject closest = GetClosestUnit();
+            if (!IsDead())
+            {
+                if (this.Hp >= (0.25 * MaxHP))
+                {
+                    
+                    if (!IsInRange(closest))
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, closest.transform.position, speed * Time.deltaTime);
+                    }
+                    else 
+                    {
+                        opposition = GameObject.FindGameObjectsWithTag("Day Walkers");
+                        secondOpposition = GameObject.FindGameObjectsWithTag("Night Riders");
+                        foreach (GameObject temp in opposition)
+                        {
+                            if (!temp.name.Contains("Building"))
+                            {
+                                if (IsInRange(temp))
+                                {
+                                    Attack(temp);
+                                }
+                            }
+                        }
+
+                        foreach (GameObject temp in secondOpposition)
+                        {
+                            if (!temp.name.Contains("Building"))
+                            {
+                                if (IsInRange(temp))
+                                {
+                                    Attack(temp);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    GameObject movePoint = new GameObject();
+                    movePoint.transform.position = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+                    transform.position = Vector3.MoveTowards(transform.position, movePoint.transform.position, speed * Time.deltaTime);
+                }
+            }
+            else
+            {
+                GameObject.Destroy(gameObject);
             }
         }
 
-       // healthbar.fillAmount = (float)hp / maxHP;
+        healthbar.fillAmount = (float)hp / maxHP;
     }
 
     protected GameObject GetClosestUnit()
     {
-        GameObject unit = null;
-        GameObject[] opposition = null;
-        GameObject[] secondOpposition = null;
+        GameObject unit = null;       
         //GameObject[] buildings = null;
 
         switch (team)
@@ -145,6 +191,7 @@ public abstract class Unit : MonoBehaviour
         if (Enemy.name.Contains("Unit"))
         {
             Enemy.GetComponent<Unit>().Hp -= this.Attk;
+            
         }
         else if (Enemy.name.Contains("Building"))
         {
@@ -155,10 +202,18 @@ public abstract class Unit : MonoBehaviour
     protected bool IsDead()
     {
         bool dead = false;
-        if(this.Hp <= 0)
+        ResourceBuilding resourceBuildingUsed = GameObject.FindObjectOfType<ResourceBuilding>();
+        if (this.Hp <= 0)
         {
-            GameObject.Destroy(gameObject);
             dead = true;
+            if (gameObject.tag == "Day Walkers")
+            {
+                resourceBuildingUsed.generatedNR++;
+            }
+            else if (gameObject.tag == "Night Riders")
+            {
+                resourceBuildingUsed.generatedDW++;
+            }
         }
 
         return dead;

@@ -37,10 +37,6 @@ public class GameEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Text resourceDisplay = GameObject.Find("ResourceDisplay").GetComponent<Text>();resourceDisplay.text += "Night Riders Resources: ";
-        resourceDisplay.text = "";
-        resourceDisplay.text += "Resources: " + "\n";
-        resourceDisplay.text += "Night Riders Resources: " + GetComponent<ResourceBuilding>().generatedNR + "\n";//+ generatedNR;
-        resourceDisplay.text += "Day Walkers Resources: " + GetComponent<ResourceBuilding>().generatedDW;//+ generatedDW;
+        
     }
 }

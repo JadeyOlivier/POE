@@ -8,13 +8,13 @@ public class MeleeUnit : Unit
     // Start is called before the first frame update
     void Start()
     {
-        hp = 10;
+        hp = 1250;
         maxHP = hp;
-        attk = 2;
+        attk = 20;
         range = 1;
         speed = 0.5f;
 
-        team = Random.Range(0, 3);
+        team = Random.Range(0, 2);
         GetComponent<MeshRenderer>().material = mat[team];
         switch (team)
         {

@@ -26,13 +26,22 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.name == "ResourceBuilding")
+        if(gameObject.name.Contains("ResourceBuilding"))
         {
-            GetComponent<ResourceBuilding>().GenResources();
+            if (GetComponent<ResourceBuilding>().IsDead() == false)
+            {
+                GetComponent<ResourceBuilding>().GenResources();
+                GetComponent<ResourceBuilding>().DisplayResources();
+            }
         }
-        else if (gameObject.name == "FactoryBuilding")
+        else if (gameObject.name.Contains("FactoryBuilding"))
         {
+            if(GetComponent<FactoryBuilding>().IsDead() == false)
+            {
+                GetComponent<FactoryBuilding>().GenUnit();
+            }
+        }
 
-        }
+        healthbar.fillAmount = (float)buildingHp / BuildingMaxHP;
     }
 }

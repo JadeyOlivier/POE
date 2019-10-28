@@ -8,9 +8,9 @@ public class RangedUnit : Unit
     // Start is called before the first frame update
     void Start()
     {
-        hp = 10;
+        hp = 1250;
         maxHP = hp;
-        attk = 2;
+        attk = 20;
         range = 2;
         speed = 0.5f;
 

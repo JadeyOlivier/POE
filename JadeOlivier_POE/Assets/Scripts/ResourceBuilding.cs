@@ -10,6 +10,7 @@ public class ResourceBuilding : Building
     public int generatedNR = 0;
     public int generatedDW = 0;
     public int genAmount = 0;
+    public int productTime = 0;
 
     void Start()
     {
@@ -32,11 +33,13 @@ public class ResourceBuilding : Building
                 }
         }
         resources = Random.Range(50, 201);
-        genAmount = Random.Range(1, 5);
+        genAmount = 5;
+        productTime = 5;
     }
 
     public void GenResources()
     {
+
         if (IsDead() == false && resources > 0)
         {
             switch (buildingTeam)
@@ -60,9 +63,8 @@ public class ResourceBuilding : Building
     public bool IsDead()
     {
         bool dead = false;
-        if(this.BuildingHp <= 0)
-        {
-            GameObject.Destroy(gameObject);
+        if (this.BuildingHp <= 0)
+        {           
             if (gameObject.tag == "Day Walkers")
             {
                 generatedNR++;
@@ -71,10 +73,20 @@ public class ResourceBuilding : Building
             {
                 generatedDW++;
             }
+            GameObject.Destroy(gameObject);
             dead = true;
         }
 
         return dead;
+    }
+
+    public void DisplayResources()
+    {
+        Text resourceDisplay = GameObject.Find("ResourceDisplay").GetComponent<Text>(); resourceDisplay.text += "Night Riders Resources: ";
+        resourceDisplay.text = "";
+        resourceDisplay.text += "Resources: " + "\n";
+        resourceDisplay.text += "Night Riders Resources: " + generatedNR + "\n";
+        resourceDisplay.text += "Day Walkers Resources: " + generatedDW;
     }
 
 }
